@@ -17,6 +17,9 @@ The relationship between democracy and economic performance is a complex one tha
 
 We are interested therefore, to study the market responses to such a political shift that reflects a subtle distortion of democratic principles as a step towards a truly autocratic system.
 
+
+
+
 --- 
 
 ## Prompt - Kazakhstan
@@ -52,6 +55,19 @@ In each of the above cases, we cannot be sure that there will definitely be a ch
 ---
 
 ## Freedom Indices
+
+# Economic Freedom Index (Heritage Foundation)
+
+![plot of chunk econfreedom](assets/fig/econfreedom.png) 
+
+---
+
+## Freedom Indices
+
+# EIU Democracy Index
+
+![plot of chunk demoind](assets/fig/demoind.png) 
+
 
 
 ---
@@ -92,3 +108,8 @@ One unfortunate matter is that 2007 happen to be the year of the housing bubble 
 
 ![plot of chunk trade](assets/fig/trade.png) 
 
+---
+
+## Conclusion
+
+The ultimate goal of the paper is perhaps to ask ourselves: 'Yes, the president is going to continue to rule on. But beyond that, what has changed profoundly that is to affect businesses, economic interactions, opportunities, political stability or other elements that our 'target audience' may care about.
