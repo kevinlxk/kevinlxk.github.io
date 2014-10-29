@@ -74,6 +74,9 @@ In each of the above cases, we cannot be sure that there will definitely be a ch
 
 ## Doing Business
 
+Data available on Doing Business Ratings is not that useful because of measurement changes that meant there is no overall score available that stretches across the 2007 boundary.
+
+![plot of chunk bizind](assets/fig/bizind.png) 
 
 ---
 
@@ -113,3 +116,5 @@ One unfortunate matter is that 2007 happen to be the year of the housing bubble 
 ## Conclusion
 
 The ultimate goal of the paper is perhaps to ask ourselves: 'Yes, the president is going to continue to rule on. But beyond that, what has changed profoundly that is to affect businesses, economic interactions, opportunities, political stability or other elements that our 'target audience' may care about.
+
+---

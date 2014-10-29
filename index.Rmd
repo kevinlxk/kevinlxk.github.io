@@ -112,6 +112,27 @@ altgph2 <- ggplot(data = demoind, aes(x = Year,y = Score, fill = Country)) +
 
 ## Doing Business
 
+Data available on Doing Business Ratings is not that useful because of measurement changes that meant there is no overall score available that stretches across the 2007 boundary.
+
+```{r bizind, echo=FALSE, warning=FALSE, fig.width=12}
+year <- seq(2010,2015)
+kazscore <- c(57.07,60.24,63.18,63.12,63.59,64.59)
+uzbscore <- c(40.83,41.82,44.83,47.69,50.02,54.26)
+kazbiz <- cbind(year,kazscore,"Kazakhstan")
+uzbbiz <- cbind(year,uzbscore,"Uzbekistan")
+bizind <- rbind(kazbiz,uzbbiz)
+bizind <- as.data.frame(bizind)
+names(bizind) <- c("Year", "Score", "Country")
+bizind$Score <- as.numeric(as.character(bizind$Score))
+bizind$Year <- as.numeric(as.character(bizind$Year))
+ggplot(data = bizind, aes(x = Year)) + 
+        geom_bar(aes(y = Score), stat = "identity", position = "dodge") +
+        facet_grid(. ~ Country) +
+        ggtitle("Improving Business Climate")
+altgph3 <- ggplot(data = bizind, aes(x = Year,y = Score, fill = Country)) + 
+        geom_bar(stat = "identity", position = "dodge") + 
+        ggtitle("Business Institutional Measures")
+```
 
 ---
 
@@ -218,3 +239,5 @@ qplot(data = comdat[which(comdat$cty == "kaz" | comdat$cty == "uzb"),], x = year
 ## Conclusion
 
 The ultimate goal of the paper is perhaps to ask ourselves: 'Yes, the president is going to continue to rule on. But beyond that, what has changed profoundly that is to affect businesses, economic interactions, opportunities, political stability or other elements that our 'target audience' may care about.
+
+---
