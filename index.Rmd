@@ -1,0 +1,104 @@
+---
+title       : Monte Carlo Simulation with R
+subtitle    : Slidify Trial Series
+author      : Kevin Low
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+
+---
+## Introduction
+
+# Contents
+
+In this presentation, we are going to perform a Monte Carlo Simulation to study the behaviour of OLS estimated coefficients:
+
+1. Parameter Setup
+2. The Model (& running it)
+3. The Resulting Distributions
+
+# Loading Libraries
+
+In this simulation, we are going to require ggplot2 library in order to plot the charts we would like to show later, so we begin by loading the necessary library.
+
+```{r libraries}
+library(ggplot2)
+```
+
+
+---
+
+## Parameter Setup
+
+We start off by setting seed in order to ensure reproducible 'randomization' and then proceed to define the pre-set parameters of the model we are building
+
+```{r setpar}
+set.seed(1234)
+a <- 1
+b <- 2.5
+sigx <- 200
+mux <- 7
+sigy <- 15
+n <- 100
+```
+
+
+---
+
+## The Model
+
+We have the classic OLS model which we embed in a for-loop in order to generate 1000 betas which allows us to build the distribution we want to see.
+
+```{r genbeta}
+beta <- NULL
+betase <- NULL
+for (i in 1:1000) {
+        x <- rpois(n, round(runif(1,1,n), digit = 0))
+        y <- a + b*x + rnorm(n,0,sigy)
+        reg <- summary(lm(y ~ x))
+        bet <- reg$coefficients[2] # Extracting the beta for this particular regression
+        bse <- reg$coefficients[4] # Extracting the Standard error of beta
+        beta <- c(beta, bet)
+        betase <- c(betase, bse)
+}
+estimates <- data.frame(beta, betase, row.names = NULL)
+```
+
+---
+
+## Distribution of Beta Coefficients
+
+```{r coeffcharts, fig.height = 4}
+ggplot(data = estimates, aes(x = beta)) + 
+        geom_histogram(aes(y = ..density..), binwidth = 0.1) + 
+        geom_density() + 
+        geom_vline(aes(xintercept = b), col = "green") + 
+        ggtitle("Distribution of Coefficient Estimates")
+```
+
+We see that the mean is indeed on the value `r b` which we have set just now.
+
+---
+
+## Distribution of Standard Errors
+
+```{r secharts, fig.height = 4}
+ggplot(data = estimates, aes(x = betase)) + 
+        geom_histogram(aes(y = ..density..), binwidth = 0.05) + 
+        geom_density() + 
+        ggtitle("Distribution of Standard Error of Coefficient Estimates")
+```
+
+The standard error appears to follow the chi-sq distribution as we should expect of a normal variable.
+
+---
+## Summary
+
+1. We see that the theoretical mean is indeed the monte carlo mean of the distribution of beta
+2. We can verify that the resulting betas conforms to a normal distribution
+3. We can verify that the standard error of the betas conforms to a chi-sq distribution
+
