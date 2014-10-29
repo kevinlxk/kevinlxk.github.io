@@ -1,6 +1,6 @@
 ---
-title       : Monte Carlo Simulation with R
-subtitle    : Slidify Trial Series
+title       : Presidential Monarchy & Economic Impacts
+subtitle    : Preliminary Proposal for Paper
 author      : Kevin Low
 job         : 
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -9,105 +9,86 @@ hitheme     : tomorrow      #
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
-
 ---
+
 ## Introduction
 
-# Contents
+The relationship between democracy and economic performance is a complex one that has been studied through time with varying degrees of enthusiasm from academia. Results have been mixed. Even [Francis Fukuyama](http://en.wikipedia.org/wiki/Francis_Fukuyama) who proposed in '[*The End of History and the Last Man*](http://en.wikipedia.org/wiki/The_End_of_History_and_the_Last_Man)' that the Western liberal democracy is the end of the evolution of system of governance backtracked on multiple counts.
 
-In this presentation, we are going to perform a Monte Carlo Simulation to study the behaviour of OLS estimated coefficients:
+We are interested therefore, to study the market responses to such a political shift that reflects a subtle distortion of democratic principles as a step towards a truly autocratic system.
 
-1. Parameter Setup
-2. The Model (& running it)
-3. The Resulting Distributions
+--- 
 
-# Loading Libraries
+## Prompt - Kazakhstan
 
-In this simulation, we are going to require ggplot2 library in order to plot the charts we would like to show later, so we begin by loading the necessary library.
+This topic is motivated by the single observation that in 2007, the precedent for a sort of 'presidential monarchy' regime is set down in both Kazakhstan and Uzbekistan, albeit in subtly different conditions:
 
+In the case of Kazakhstan,
+> On 18 May 2007, the Parliament of Kazakhstan approved a constitutional amendment which allowed the incumbent president—himself—to run for an unlimited number of five-year terms. This amendment applied specifically and only to Nazarbayev: the original constitution's prescribed maximum of two five-year terms will still apply to all future presidents of Kazakhstan. - [*Wikipedia*](http://en.wikipedia.org/wiki/Nursultan_Nazarbayev)
 
-```r
-library(ggplot2)
-```
+*Note that Nazarbayev ran for the 2011 election (the first one after the constitutional amendment), which he won.
+
+--- 
+
+## Prompt - Uzbekistan
+
+In the case of Uzbekistan,
+> Karimov sought another term in the December 2007 presidential election, despite arguments that he was ineligible due to the two-term limit on the presidency. On November 6, 2007, Karimov accepted the nomination of the Uzbekistan Liberal Democratic Party to run for a third term. On November 19, the Central Election Commission announced the approval of Karimov's candidacy, a decision that Karimov's opponents condemned as illegal. - [*Wikipedia*](http://en.wikipedia.org/wiki/Islam_Karimov)
+
+---
+
+## Market Response Variables
+
+From here on, our job is simply to postulate changes in the behaviours of certain political and economic variables in response to this change.
+
+1. Freedom Indices
+ + Economic Freedom Index (Heritage Foundation)
+ + EIU Democracy Index
+2. Doing Business Ratings
+3. Macroeconomic Variable Changes
+
+In each of the above cases, we cannot be sure that there will definitely be a change in response to the prompt. Politically, analysts might already assumed that the presidents would stay in power indefinitely so do not greet those constitutional changes/challenges with surprise. And this could apply in other domains as well.
+
+---
+
+## Freedom Indices
 
 
 ---
 
-## Parameter Setup
-
-We start off by setting seed in order to ensure reproducible 'randomization' and then proceed to define the pre-set parameters of the model we are building
-
-
-```r
-set.seed(1234)
-a <- 1
-b <- 2.5
-sigx <- 200
-mux <- 7
-sigy <- 15
-n <- 100
-```
+## Doing Business
 
 
 ---
 
-## The Model
+## Macroeconomic Variables
 
-We have the classic OLS model which we embed in a for-loop in order to generate 1000 betas which allows us to build the distribution we want to see.
+Here, we examine the following (data from [WDI](http://data.worldbank.org/data-catalog/world-development-indicators)):
+
+1. GDP Growth
+2. FDI as a percentage of GDP
+3. Trade as a percentage of GDP
+
+One unfortunate matter is that 2007 happen to be the year of the housing bubble crash in the US, which precipitated the Subprime Mortgage Crisis and resulted in the Great Recession thereafter. The only consolation is that we should not expect the CIS countries to be so plugged into the global economy financially as to suffer. Nevertheless, if we are examining variables such as FDI, Trade and GDP, there is inevitably some degree of impact entering from the global economy. Investors may not be responding to the political change as much as the increase in risk aversion in the financial markets.
 
 
-```r
-beta <- NULL
-betase <- NULL
-for (i in 1:1000) {
-        x <- rpois(n, round(runif(1,1,n), digit = 0))
-        y <- a + b*x + rnorm(n,0,sigy)
-        reg <- summary(lm(y ~ x))
-        bet <- reg$coefficients[2] # Extracting the beta for this particular regression
-        bse <- reg$coefficients[4] # Extracting the Standard error of beta
-        beta <- c(beta, bet)
-        betase <- c(betase, bse)
-}
-estimates <- data.frame(beta, betase, row.names = NULL)
-```
 
 ---
 
-## Distribution of Beta Coefficients
+## Macroeconomic Variable: GDP Growth
 
-
-```r
-ggplot(data = estimates, aes(x = beta)) + 
-        geom_histogram(aes(y = ..density..), binwidth = 0.1) + 
-        geom_density() + 
-        geom_vline(aes(xintercept = b), col = "green") + 
-        ggtitle("Distribution of Coefficient Estimates")
-```
-
-![plot of chunk coeffcharts](assets/fig/coeffcharts.png) 
-
-We see that the mean is indeed on the value 2.5 which we have set just now.
+![plot of chunk gdpgrowth](assets/fig/gdpgrowth.png) 
 
 ---
 
-## Distribution of Standard Errors
+## Macroeconomic Variable: FDI as %GDP
 
+![plot of chunk fdi](assets/fig/fdi.png) 
 
-```r
-ggplot(data = estimates, aes(x = betase)) + 
-        geom_histogram(aes(y = ..density..), binwidth = 0.05) + 
-        geom_density() + 
-        ggtitle("Distribution of Standard Error of Coefficient Estimates")
-```
-
-![plot of chunk secharts](assets/fig/secharts.png) 
-
-The standard error appears to follow the chi-sq distribution as we should expect of a normal variable.
 
 ---
-## Summary
 
-1. We see that the theoretical mean is indeed the monte carlo mean of the distribution of beta
-2. We can verify that the resulting betas conforms to a normal distribution
-3. We can verify that the standard error of the betas conforms to a chi-sq distribution
+## Macroeconomic Variable: Trade as %GDP
+
+![plot of chunk trade](assets/fig/trade.png) 
 
