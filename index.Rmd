@@ -114,7 +114,7 @@ altgph2 <- ggplot(data = demoind, aes(x = Year,y = Score, fill = Country)) +
 
 Data available on Doing Business Ratings is not that useful because of measurement changes that meant there is no overall score available that stretches across the 2007 boundary.
 
-```{r bizind, echo=FALSE, warning=FALSE, fig.width=12}
+```{r bizind, echo=FALSE, warning=FALSE, fig.height=6}
 year <- seq(2010,2015)
 kazscore <- c(57.07,60.24,63.18,63.12,63.59,64.59)
 uzbscore <- c(40.83,41.82,44.83,47.69,50.02,54.26)
