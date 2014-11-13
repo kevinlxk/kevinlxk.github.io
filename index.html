@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cheight-predict App Pitch</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Cheight-predict App Pitch">
+  <meta name="author" content="Kevin Low">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Cheight-predict App Pitch</h1>
+    <h2>Predicting your child's adult height</h2>
+    <p>Kevin Low<br/>Data Products Course Student</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Introducing Cheight-predict</h2>
+  </hgroup>
+  <article data-timings="">
+    <h1>What It Does?</h1>
+
+<ol>
+<li>Provides a prediction of your child&#39;s height based on yours (&amp; perhaps also that of your partner&#39;s)</li>
+<li>Maps your child&#39;s predicted height on the distribution of heights in the dataset used for the prediction model</li>
+</ol>
+
+<h1>General Features</h1>
+
+<ol>
+<li>Simple to use, intuitive user interface</li>
+<li>Reactive Output utilizing Shiny&#39;s engine</li>
+<li>Runs right off your browser!</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Input Features</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Flexibility of selecting prediction models (user as the father or mother; both parents heights included or just one)</li>
+<li>Model accounts for child&#39;s gender</li>
+<li>Input in &#39;inches&#39; or &#39;centimeters&#39; accepted</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Output Features</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Child&#39;s predicted height in &#39;inches&#39; and &#39;centimeters&#39;</li>
+<li>Shows child&#39;s height positioning on the distribution of heights in the dataset</li>
+<li>Completely reactive, without submit button</li>
+</ol>
+
+<p>Note however that the output contains an error message when none of the parents are selected for the model input.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Sample Output</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Backend model function generates the <em>cheight</em> variable which is presented to users in both inches and centimeters.</p>
+
+<pre><code class="r">cheight &lt;- modsel(input$pheight, input$fheight, input$mheight, input$cgender)
+</code></pre>
+
+<p>Say, we have a predicted height of 67.221 inches for a boy; the app also generates the following charts:</p>
+
+<p><img src="assets/fig/samdist.png" alt="plot of chunk samdist"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Afterthoughts</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Cheight-predict available right now on a <a href="http://kevinlxk.shinyapps.io/heightpredict">Shinyapps.io page</a>.</p>
+
+<p>Open-source: UI and Backend codes are available on my <a href="https://github.com/kevinlxk/heightpredict">github page</a>.</p>
+
+<p>You are very welcomed to develop this app with me, further enhancing functionality and accounting for more variables or improving the prediction algorithm.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Introducing Cheight-predict'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Input Features'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Output Features'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Sample Output'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Afterthoughts'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
