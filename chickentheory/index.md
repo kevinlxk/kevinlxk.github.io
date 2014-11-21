@@ -77,16 +77,25 @@ In the cases where production costs is different then the lower cost producer ca
 1. The market with higher-cost production will have a price higher than the market with lower-cost production but the gap might be smaller than the transport/transaction costs by virtue of competition between the domestic producers in the higher-cost markets
 2. We should also observe that in this case, the price series not only do not converge, they would not even cointegrate since the prices would be more sensitive to local demand and supply as long as the price movements falls within the price-ceiling created by the presence of the lower-cost producer (adjusting for transport/transaction costs)
 
+---
+
+## Who provides the lower bound prices?
+
+From the net export figures in quantity of live chickens, it appears that France and Netherlands are the export powerhouse though Denmark appears to have much price advantage.
+
+![plot of chunk tradestat](assets/fig/tradestat.png) 
+
+Since trade figures were annual, it was much harder to get a sense of how it relates to local demand-supply shocks in Spain and Belgium. Data was also sparse for Belgium
 
 ---
 
-## Suppose Denmark was the low-cost producer
+## Suppose France & Netherlands were the core producers
 
-We include Greece as a sort of 'upper bound' in terms of prices, the 'maximum' transaction costs involved.
+We include Greece as a sort of 'upper bound' in terms of prices, the 'maximum' transaction costs involved. Denmark serves as a 'lower bound' in prices but since it hardly exported, it wasn't exactly an important threat to the domestic producers in Spain & Belgium
 
 ![plot of chunk band](assets/fig/band.png) 
 
-1. Belgium and Spain indeed have more volatile price series, and when their prices falls below Denmark prices, it doesn't stay for that long.
+1. Belgium and Spain indeed have more volatile price series, and when their prices falls below France/Netherlands' prices, it doesn't stay for that long.
 2. Belgium and Spain clearly have prices fluctuating within a certain band that is between Denmark and Greece selling prices
 
 
@@ -108,6 +117,8 @@ So far so good, we assume competitive producers in Belgium and Spain with higher
 We can see and imagine some sort of price ceiling for Greece and Ireland that fluctuates with Denmark's prices
 
 ![plot of chunk band2](assets/fig/band2.png) 
+
+Greek chicken farms were indeed caught and fined for price-fixing through 1996-2010, reflecting the market power present in the suppliers of live chickens in Greece. 
 
 ---
 
