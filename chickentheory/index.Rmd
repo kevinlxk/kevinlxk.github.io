@@ -94,19 +94,50 @@ In the cases where production costs is different then the lower cost producer ca
 1. The market with higher-cost production will have a price higher than the market with lower-cost production but the gap might be smaller than the transport/transaction costs by virtue of competition between the domestic producers in the higher-cost markets
 2. We should also observe that in this case, the price series not only do not converge, they would not even cointegrate since the prices would be more sensitive to local demand and supply as long as the price movements falls within the price-ceiling created by the presence of the lower-cost producer (adjusting for transport/transaction costs)
 
+---
+
+## Who provides the lower bound prices?
+
+From the net export figures in quantity of live chickens, it appears that France and Netherlands are the export powerhouse though Denmark appears to have much price advantage.
+
+```{r tradestat, echo=FALSE, fig.width=12,fig.height=4.5, warning=FALSE, message=FALSE}
+## Trade Data Analysis
+trade <- read.csv("chicktrade.csv", header = TRUE)
+trade <- select(trade, AreaName, ElementName, Year, Value)
+trade <- filter(trade, !(AreaName == "Italy"))
+
+# Spliting Frames
+importq <- filter(trade, ElementName == "Import Quantity")
+exportq <- filter(trade, ElementName == "Export Quantity")
+
+# Renaming
+names(importq)[4] <- "Imports"
+names(exportq)[4] <- "Exports"
+
+# Combining
+importq <- select(importq, AreaName, Year, Imports)
+exportq <- select(exportq, AreaName, Year, Exports)
+netq <- merge(importq, exportq)
+netq <- mutate(netq, NetTrade = Exports - Imports)
+
+# Restricting Time Period
+qplot(data = netq, x = Year, y = NetTrade, geom = "line", col = AreaName) + xlim(1993,2003)
+```
+
+Since trade figures were annual, it was much harder to get a sense of how it relates to local demand-supply shocks in Spain and Belgium. Data was also sparse for Belgium
 
 ---
 
-## Suppose Denmark was the low-cost producer
+## Suppose France & Netherlands were the core producers
 
-We include Greece as a sort of 'upper bound' in terms of prices, the 'maximum' transaction costs involved.
+We include Greece as a sort of 'upper bound' in terms of prices, the 'maximum' transaction costs involved. Denmark serves as a 'lower bound' in prices but since it hardly exported, it wasn't exactly an important threat to the domestic producers in Spain & Belgium
 
 ```{r band, echo=FALSE, fig.width=12, fig.height=4}
-stat.band <- filter(data, country == "Belgium" | country == "Spain" | country == "Denmark" | country == "Greece")
+stat.band <- filter(data, country == "Belgium" | country == "Spain" | country == "France" | country == "Netherlands" | country == "Greece")
 qplot(data = stat.band, x = mthyr, y = price, geom = "line", col = country)
 ```
 
-1. Belgium and Spain indeed have more volatile price series, and when their prices falls below Denmark prices, it doesn't stay for that long.
+1. Belgium and Spain indeed have more volatile price series, and when their prices falls below France/Netherlands' prices, it doesn't stay for that long.
 2. Belgium and Spain clearly have prices fluctuating within a certain band that is between Denmark and Greece selling prices
 
 
@@ -127,10 +158,12 @@ So far so good, we assume competitive producers in Belgium and Spain with higher
 
 We can see and imagine some sort of price ceiling for Greece and Ireland that fluctuates with Denmark's prices
 
-```{r band2, echo=FALSE, fig.width=12, fig.height=6}
+```{r band2, echo=FALSE, fig.width=12, fig.height=5}
 stat.band2 <- filter(data, country == "Ireland" | country == "Denmark" | country == "Greece")
 qplot(data = stat.band2, x = mthyr, y = price, geom = "line", col = country)
 ```
+
+Greek chicken farms were indeed caught and fined for price-fixing through 1996-2010, reflecting the market power present in the suppliers of live chickens in Greece. 
 
 ---
 
